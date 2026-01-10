@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Course - Interactive Demonstrations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎓 Algorithm Course</h1>
+            <p class="subtitle">Interactive demonstrations of popular interview algorithms</p>
+        </div>
+    </header>
+
+    <nav class="algorithm-nav">
+        <div class="container">
+            <button class="nav-btn active" data-algorithm="bubble-sort">Bubble Sort</button>
+            <button class="nav-btn" data-algorithm="quick-sort">Quick Sort</button>
+            <button class="nav-btn" data-algorithm="merge-sort">Merge Sort</button>
+            <button class="nav-btn" data-algorithm="binary-search">Binary Search</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Bubble Sort Section -->
+        <section id="bubble-sort" class="algorithm-section active">
+            <div class="algorithm-header">
+                <h2>Bubble Sort</h2>
+                <div class="complexity">
+                    <span class="badge">Time: O(n²)</span>
+                    <span class="badge">Space: O(1)</span>
+                </div>
+            </div>
+
+            <div class="description">
+                <h3>What is Bubble Sort?</h3>
+                <p>Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The algorithm gets its name because smaller elements "bubble" to the top of the list.</p>
+                
+                <h3>When to Use It?</h3>
+                <ul>
+                    <li>Educational purposes - excellent for learning sorting concepts</li>
+                    <li>Small datasets where simplicity is preferred over efficiency</li>
+                    <li>Nearly sorted data (best case: O(n) with optimization)</li>
+                    <li>When memory space is extremely limited</li>
+                </ul>
+
+                <h3>How It Works</h3>
+                <ol>
+                    <li>Start at the beginning of the array</li>
+                    <li>Compare each pair of adjacent elements</li>
+                    <li>Swap them if they are in the wrong order</li>
+                    <li>Repeat the process for each element</li>
+                    <li>After each pass, the largest unsorted element moves to its correct position</li>
+                    <li>Continue until no more swaps are needed</li>
+                </ol>
+            </div>
+
+            <div class="visualization-container">
+                <div class="controls">
+                    <button class="btn btn-primary" id="bubble-start">Start</button>
+                    <button class="btn btn-secondary" id="bubble-reset">Reset</button>
+                    <button class="btn btn-secondary" id="bubble-step">Step</button>
+                    <label>
+                        Speed: <input type="range" id="bubble-speed" min="1" max="100" value="50">
+                    </label>
+                </div>
+                <div id="bubble-visualization" class="visualization"></div>
+                <div class="step-info" id="bubble-info">
+                    <p>Click "Start" to begin the visualization</p>
+                </div>
+            </div>
+
+            <div class="code-example">
+                <h3>Example Code (JavaScript)</h3>
+                <pre><code>function bubbleSort(arr) {
+    const n = arr.length;
+    for (let i = 0; i < n - 1; i++) {
+        let swapped = false;
+        for (let j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap elements
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                swapped = true;
+            }
+        }
+        // If no swaps occurred, array is sorted
+        if (!swapped) break;
+    }
+    return arr;
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Quick Sort Section -->
+        <section id="quick-sort" class="algorithm-section">
+            <div class="algorithm-header">
+                <h2>Quick Sort</h2>
+                <div class="complexity">
+                    <span class="badge">Time: O(n log n) avg</span>
+                    <span class="badge">Space: O(log n)</span>
+                </div>
+            </div>
+
+            <div class="description">
+                <h3>What is Quick Sort?</h3>
+                <p>Quick Sort is an efficient, divide-and-conquer sorting algorithm. It works by selecting a 'pivot' element and partitioning the array around the pivot, such that elements smaller than the pivot come before it and elements greater come after it.</p>
+                
+                <h3>When to Use It?</h3>
+                <ul>
+                    <li>General-purpose sorting for large datasets</li>
+                    <li>When average-case performance is more important than worst-case</li>
+                    <li>In-place sorting is preferred (low memory overhead)</li>
+                    <li>Most standard library sorting implementations use variations of Quick Sort</li>
+                </ul>
+
+                <h3>How It Works</h3>
+                <ol>
+                    <li>Choose a pivot element from the array</li>
+                    <li>Partition: rearrange elements so smaller elements go left, larger go right</li>
+                    <li>Recursively apply the same process to the left sub-array</li>
+                    <li>Recursively apply the same process to the right sub-array</li>
+                    <li>Base case: arrays of size 0 or 1 are already sorted</li>
+                </ol>
+            </div>
+
+            <div class="visualization-container">
+                <div class="controls">
+                    <button class="btn btn-primary" id="quick-start">Start</button>
+                    <button class="btn btn-secondary" id="quick-reset">Reset</button>
+                    <button class="btn btn-secondary" id="quick-step">Step</button>
+                    <label>
+                        Speed: <input type="range" id="quick-speed" min="1" max="100" value="50">
+                    </label>
+                </div>
+                <div id="quick-visualization" class="visualization"></div>
+                <div class="step-info" id="quick-info">
+                    <p>Click "Start" to begin the visualization</p>
+                </div>
+            </div>
+
+            <div class="code-example">
+                <h3>Example Code (JavaScript)</h3>
+                <pre><code>function quickSort(arr, low = 0, high = arr.length - 1) {
+    if (low < high) {
+        // Partition the array
+        const pivotIndex = partition(arr, low, high);
+        
+        // Recursively sort left and right subarrays
+        quickSort(arr, low, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, high);
+    }
+    return arr;
+}
+
+function partition(arr, low, high) {
+    const pivot = arr[high];
+    let i = low - 1;
+    
+    for (let j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+    return i + 1;
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Merge Sort Section -->
+        <section id="merge-sort" class="algorithm-section">
+            <div class="algorithm-header">
+                <h2>Merge Sort</h2>
+                <div class="complexity">
+                    <span class="badge">Time: O(n log n)</span>
+                    <span class="badge">Space: O(n)</span>
+                </div>
+            </div>
+
+            <div class="description">
+                <h3>What is Merge Sort?</h3>
+                <p>Merge Sort is an efficient, stable, divide-and-conquer sorting algorithm. It divides the array into two halves, recursively sorts them, and then merges the sorted halves back together.</p>
+                
+                <h3>When to Use It?</h3>
+                <ul>
+                    <li>When stable sorting is required (maintains relative order of equal elements)</li>
+                    <li>Sorting linked lists (more efficient than Quick Sort for linked lists)</li>
+                    <li>When consistent O(n log n) performance is needed (no worst-case degradation)</li>
+                    <li>External sorting (sorting data that doesn't fit in memory)</li>
+                </ul>
+
+                <h3>How It Works</h3>
+                <ol>
+                    <li>Divide: Split the array into two halves</li>
+                    <li>Conquer: Recursively sort both halves</li>
+                    <li>Combine: Merge the two sorted halves into one sorted array</li>
+                    <li>Merging compares elements from both halves and places them in order</li>
+                    <li>Continue until all elements are merged</li>
+                </ol>
+            </div>
+
+            <div class="visualization-container">
+                <div class="controls">
+                    <button class="btn btn-primary" id="merge-start">Start</button>
+                    <button class="btn btn-secondary" id="merge-reset">Reset</button>
+                    <button class="btn btn-secondary" id="merge-step">Step</button>
+                    <label>
+                        Speed: <input type="range" id="merge-speed" min="1" max="100" value="50">
+                    </label>
+                </div>
+                <div id="merge-visualization" class="visualization"></div>
+                <div class="step-info" id="merge-info">
+                    <p>Click "Start" to begin the visualization</p>
+                </div>
+            </div>
+
+            <div class="code-example">
+                <h3>Example Code (JavaScript)</h3>
+                <pre><code>function mergeSort(arr) {
+    if (arr.length <= 1) return arr;
+    
+    // Divide
+    const mid = Math.floor(arr.length / 2);
+    const left = arr.slice(0, mid);
+    const right = arr.slice(mid);
+    
+    // Conquer and Combine
+    return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+    const result = [];
+    let i = 0, j = 0;
+    
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) {
+            result.push(left[i++]);
+        } else {
+            result.push(right[j++]);
+        }
+    }
+    
+    return result.concat(left.slice(i)).concat(right.slice(j));
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Binary Search Section -->
+        <section id="binary-search" class="algorithm-section">
+            <div class="algorithm-header">
+                <h2>Binary Search</h2>
+                <div class="complexity">
+                    <span class="badge">Time: O(log n)</span>
+                    <span class="badge">Space: O(1)</span>
+                </div>
+            </div>
+
+            <div class="description">
+                <h3>What is Binary Search?</h3>
+                <p>Binary Search is an efficient algorithm for finding a target value within a sorted array. It works by repeatedly dividing the search interval in half, eliminating half of the remaining elements in each step.</p>
+                
+                <h3>When to Use It?</h3>
+                <ul>
+                    <li>Searching in sorted arrays or lists</li>
+                    <li>When you need O(log n) search time</li>
+                    <li>Finding insertion points in sorted data</li>
+                    <li>Solving optimization problems (finding minimum/maximum in monotonic functions)</li>
+                    <li>Common in interviews for search-related problems</li>
+                </ul>
+
+                <h3>How It Works</h3>
+                <ol>
+                    <li>Start with the entire sorted array</li>
+                    <li>Find the middle element</li>
+                    <li>If the middle element equals the target, return its index</li>
+                    <li>If the target is less than the middle, search the left half</li>
+                    <li>If the target is greater than the middle, search the right half</li>
+                    <li>Repeat until the target is found or the search space is empty</li>
+                </ol>
+            </div>
+
+            <div class="visualization-container">
+                <div class="controls">
+                    <button class="btn btn-primary" id="binary-start">Start</button>
+                    <button class="btn btn-secondary" id="binary-reset">Reset</button>
+                    <button class="btn btn-secondary" id="binary-step">Step</button>
+                    <label>
+                        Target: <input type="number" id="binary-target" min="1" max="100" value="42">
+                    </label>
+                    <label>
+                        Speed: <input type="range" id="binary-speed" min="1" max="100" value="50">
+                    </label>
+                </div>
+                <div id="binary-visualization" class="visualization"></div>
+                <div class="step-info" id="binary-info">
+                    <p>Click "Start" to begin the visualization</p>
+                </div>
+            </div>
+
+            <div class="code-example">
+                <h3>Example Code (JavaScript)</h3>
+                <pre><code>function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+    
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        
+        if (arr[mid] === target) {
+            return mid; // Found the target
+        } else if (arr[mid] < target) {
+            left = mid + 1; // Search right half
+        } else {
+            right = mid - 1; // Search left half
+        }
+    }
+    
+    return -1; // Target not found
+}</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Algorithm Course - Interactive learning made easy</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
