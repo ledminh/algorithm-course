@@ -176,7 +176,12 @@ async function stepBubbleSort() {
     alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
 }
 
-// ==================== QUICK SORT ====================
+async function stepQuickSort() {
+    if (quickAnimating) return;
+    alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
+}
+
+// ==================== MERGE SORT ====================
 let quickArray = [];
 let quickAnimating = false;
 
@@ -187,6 +192,7 @@ function initQuickSort() {
 
     document.getElementById('quick-start').addEventListener('click', startQuickSort);
     document.getElementById('quick-reset').addEventListener('click', resetQuickSort);
+    document.getElementById('quick-step').addEventListener('click', stepQuickSort);
 }
 
 function resetQuickSort() {
@@ -257,7 +263,8 @@ async function partition(arr, low, high, container, info, speed) {
                 [arr[i], arr[j]] = [arr[j], arr[i]];
                 await delay(speed * 10);
                 createBars(container, arr);
-                bars[high].classList.add('pivot');
+                const updatedBars = container.querySelectorAll('.bar');
+                updatedBars[high].classList.add('pivot');
             }
         } else {
             bars[j].classList.remove('comparing');
@@ -284,6 +291,7 @@ function initMergeSort() {
 
     document.getElementById('merge-start').addEventListener('click', startMergeSort);
     document.getElementById('merge-reset').addEventListener('click', resetMergeSort);
+    document.getElementById('merge-step').addEventListener('click', stepMergeSort);
 }
 
 function resetMergeSort() {
@@ -315,6 +323,11 @@ async function startMergeSort() {
     
     mergeAnimating = false;
     document.getElementById('merge-start').disabled = false;
+}
+
+async function stepMergeSort() {
+    if (mergeAnimating) return;
+    alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
 }
 
 async function mergeSortHelper(arr, left, right, container, info, speed) {
@@ -360,7 +373,8 @@ async function merge(arr, left, mid, right, container, info, speed) {
         }
         
         createBars(container, arr);
-        bars[k].classList.add('swapping');
+        const updatedBars = container.querySelectorAll('.bar');
+        updatedBars[k].classList.add('swapping');
         await delay(speed * 10);
         k++;
     }
@@ -398,6 +412,7 @@ function initBinarySearch() {
 
     document.getElementById('binary-start').addEventListener('click', startBinarySearch);
     document.getElementById('binary-reset').addEventListener('click', resetBinarySearch);
+    document.getElementById('binary-step').addEventListener('click', stepBinarySearch);
 }
 
 function resetBinarySearch() {
@@ -478,6 +493,11 @@ async function startBinarySearch() {
     
     binaryAnimating = false;
     document.getElementById('binary-start').disabled = false;
+}
+
+async function stepBinarySearch() {
+    if (binaryAnimating) return;
+    alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
 }
 
 // Utility function for ordinal suffix
