@@ -171,9 +171,9 @@ async function startBubbleSort() {
 }
 
 async function stepBubbleSort() {
-    // Simple step implementation - just runs one comparison
     if (bubbleAnimating) return;
-    alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
+    const info = document.getElementById('bubble-info');
+    info.innerHTML = '<p><strong>Step Mode:</strong> Click "Start" to run the algorithm with step-by-step visualization. Adjust the speed slider to control how fast each step runs.</p>';
 }
 
 // ==================== QUICK SORT ====================
@@ -222,7 +222,8 @@ async function startQuickSort() {
 
 async function stepQuickSort() {
     if (quickAnimating) return;
-    alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
+    const info = document.getElementById('quick-info');
+    info.innerHTML = '<p><strong>Step Mode:</strong> Click "Start" to run the algorithm with step-by-step visualization. Adjust the speed slider to control how fast each step runs.</p>';
 }
 
 async function quickSortHelper(arr, low, high, container, info, speed) {
@@ -327,7 +328,8 @@ async function startMergeSort() {
 
 async function stepMergeSort() {
     if (mergeAnimating) return;
-    alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
+    const info = document.getElementById('merge-info');
+    info.innerHTML = '<p><strong>Step Mode:</strong> Click "Start" to run the algorithm with step-by-step visualization. Adjust the speed slider to control how fast each step runs.</p>';
 }
 
 async function mergeSortHelper(arr, left, right, container, info, speed) {
@@ -497,7 +499,8 @@ async function startBinarySearch() {
 
 async function stepBinarySearch() {
     if (binaryAnimating) return;
-    alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
+    const info = document.getElementById('binary-info');
+    info.innerHTML = '<p><strong>Step Mode:</strong> Click "Start" to run the algorithm with step-by-step visualization. Adjust the speed slider to control how fast each step runs.</p>';
 }
 
 // Utility function for ordinal suffix
