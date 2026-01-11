@@ -176,12 +176,7 @@ async function stepBubbleSort() {
     alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
 }
 
-async function stepQuickSort() {
-    if (quickAnimating) return;
-    alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
-}
-
-// ==================== MERGE SORT ====================
+// ==================== QUICK SORT ====================
 let quickArray = [];
 let quickAnimating = false;
 
@@ -223,6 +218,11 @@ async function startQuickSort() {
     
     quickAnimating = false;
     document.getElementById('quick-start').disabled = false;
+}
+
+async function stepQuickSort() {
+    if (quickAnimating) return;
+    alert('Step mode: Click "Start" and watch the algorithm progress step by step!');
 }
 
 async function quickSortHelper(arr, low, high, container, info, speed) {
